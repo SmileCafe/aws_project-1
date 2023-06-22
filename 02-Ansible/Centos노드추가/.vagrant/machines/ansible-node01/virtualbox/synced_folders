@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/git_repo/aws_project/02-Ansible/Centos 노드 추가","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
