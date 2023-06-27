@@ -2,8 +2,9 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
 config.vm.boot_timeout = 1800  # Setting up 30 Minute Time Out
-# Centos Nodes
-#===================#
+#==============#
+# Centos Nodes #
+#==============#
 # Ansible-Node01    
 
   config.vm.define "ansible-node01" do |cfg|
@@ -54,7 +55,7 @@ config.vm.define "ansible-node04" do |cfg|
   cfg.vm.host_name = "ansible-node04"   # Host Name for Virtual Machine  
   cfg.vm.network "private_network", ip: "192.168.56.14"   # Network Configuration
   cfg.vm.network "forwarded_port", guest:22, host: 60014, auto_correct: true
-  cfg.vm.synced_folder "../data", "/vagrant", disabled: ture
+  cfg.vm.synced_folder "../data", "/vagrant", disabled: true
 end
 
 # Ansible-Node05    
@@ -66,7 +67,7 @@ config.vm.define "ansible-node05" do |cfg|
   cfg.vm.host_name = "ansible-node05"   # Host Name for Virtual Machine  
   cfg.vm.network "private_network", ip: "192.168.56.15"   # Network Configuration
   cfg.vm.network "forwarded_port", guest:22, host: 60015, auto_correct: true
-  cfg.vm.synced_folder "../data", "/vagrant", disabled: ture
+  cfg.vm.synced_folder "../data", "/vagrant", disabled: true
 end
 
 # Ansible-Node06    
@@ -78,7 +79,7 @@ config.vm.define "ansible-node06" do |cfg|
   cfg.vm.host_name = "ansible-node06"   # Host Name for Virtual Machine  
   cfg.vm.network "private_network", ip: "192.168.56.16"   # Network Configuration
   cfg.vm.network "forwarded_port", guest:22, host: 60016, auto_correct: true
-  cfg.vm.synced_folder "../data", "/vagrant", disabled: ture
+  cfg.vm.synced_folder "../data", "/vagrant", disabled: true
 end
 
 #===================#
@@ -91,7 +92,7 @@ end
     end
     cfg.vm.host_name = "ansible-server"   # Host Name for Virtual Machine  
     cfg.vm.network "private_network", ip: "192.168.56.10"   # Network Configuration
-    cfg.vm.network "forwarded_port", guest:22, host: 60010, auto_correct: true, id: "ssh"
+    cfg.vm.network "forwarded_port", guest:22, host: 60010, auto_correct: true, id: "ssh" 
     # Shared Folder with Host
     cfg.vm.synced_folder "../data", "/vagrant", disabled: true
     cfg.vm.provision "shell", inline: "yum install epel-release -y"
