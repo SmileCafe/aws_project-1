@@ -1,12 +1,11 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-
+Vagrant.configure("2") do |config|
+config.vm.boot_timeout = 1800  # Setting up 30 Minute Time Out
 # Centos Nodes
 #===================#
 # Ansible-Node01    
 
-Vagrant.configure("2") do |config|
-  config.vm.boot_timeout = 180  # Setting up 30 Minute Time Out
   config.vm.define "ansible-node01" do |cfg|
     cfg.vm.box = "centos/7"               # Indicating OS to provision
     cfg.vm.provider "virtualbox" do |vb|
@@ -17,11 +16,8 @@ Vagrant.configure("2") do |config|
     cfg.vm.network "forwarded_port", guest:22, host: 60011, auto_correct: true
     cfg.vm.provision "shell", path: "bash_ssh_conf_4_CentOS.sh"
   end
-end
 
 # Ansible-Node02    
-Vagrant.configure("2") do |config|
-  config.vm.boot_timeout = 180  # Setting up 30 Minute Time Out
   config.vm.define "ansible-node02" do |cfg|
     cfg.vm.box = "centos/7"               # Indicating OS to provision
     cfg.vm.provider "virtualbox" do |vb|
@@ -32,12 +28,9 @@ Vagrant.configure("2") do |config|
     cfg.vm.network "forwarded_port", guest:22, host: 60012, auto_correct: true
     cfg.vm.provision "shell", path: "bash_ssh_conf_4_CentOS.sh"
   end
-end
 
 # Ansible-Node03    
-Vagrant.configure("2") do |config|
-  config.vm.boot_timeout = 180  # Setting up 30 Minute Time Out
-  config.vm.define "ansible-node03" do |cfg|
+   config.vm.define "ansible-node03" do |cfg|
     cfg.vm.box = "centos/7"               # Indicating OS to provision
     cfg.vm.provider "virtualbox" do |vb|
       vb.name = "Ansible-Node03"          # Name for Virtual Machine
@@ -47,13 +40,10 @@ Vagrant.configure("2") do |config|
     cfg.vm.network "forwarded_port", guest:22, host: 60013, auto_correct: true
     cfg.vm.provision "shell", path: "bash_ssh_conf_4_CentOS.sh"
   end
-end
 
 #===================#
 # Ansible Server    #
 #===================#
-
-Vagrant.configure("2") do |config|
   config.vm.define "ansible-server" do |cfg|
     cfg.vm.box = "centos/7"               # Indicating OS to provision
     cfg.vm.provider "virtualbox" do |vb|
@@ -68,6 +58,7 @@ Vagrant.configure("2") do |config|
     cfg.vm.provision "shell", inline: "yum install ansible -y"
     cfg.vm.provision "file", source: "ansible_env_ready.yml", destination: "ansible_env_ready.yml"
     cfg.vm.provision "shell", inline: "ansible-playbook ansible_env_ready.yml"
+    cfg.vm.provision "shell", path: "add_ssh_auth.sh", privileged: false
   end
 end
 

@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+ #! /usr/bin/env bash
 
 now=$(date +"%m_%d_%Y")
 cp /etc/ssh/sshd_config /etc/ssh/sshd_config_$now.backup
