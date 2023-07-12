@@ -1,8 +1,8 @@
 ---
 - name: Setup for nfs server
-hosts: localhost
-tasks:
-  - include_tasks: nfs_server.yml
+  hosts: localhost
+  tasks:
+    - include_tasks: nfs_server.yml
 
 - name: Setup for nfs clients
   hosts: nodes

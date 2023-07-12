@@ -10,7 +10,7 @@
         block: |
           [nodes]
           192.168.56.[11:16]
-
+    
     - name: Create vim env's directories & files
       shell: "{{ item }}"
       with_items:

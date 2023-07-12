@@ -1,12 +1,16 @@
 ---
-- name: Remove nginx on the nodes
+- name: Install nginx on the nodes
 hosts: nodes
 become: yes
 vars:
-  Inx_name: "{{ 'CentOS' if ansible_distribution == 'CentOS'
-                 else 'Ubuntu' if ansible_distribution == "Ubuntu'
-                 else 'Just Linux' }}"
-              
+  lnx_name: "{{ 'CentOS' if ansible_distribution == 'CentOS'
+                 else 'Ubuntu' if ansible_distribution == 'Ubuntu'
+                 else 'Just Linux'}}"
+
 tasks:
   - name: nginx for any linux
-    include_taks: "{{ lnx_name }}_remo.yml"
+    include_tasks: "{{ lnx_name }}.yml"
+
+handlers:
+  - name: restart nginx web server
+    service: name=nginx state=restarted

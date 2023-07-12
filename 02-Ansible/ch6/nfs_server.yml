@@ -1,6 +1,7 @@
 - name: make nfs_shared directory
   file:
-    path: "{{ ansible_user_dir }}"/ngf_shared"
+    # ansible_user_dir은 facts로 수집, /home/vagrant로 치환
+    path: "{{ ansible_user_dir }}/nfs_shared"
     state: directory
     mode: 0777
 
@@ -8,8 +9,8 @@
   become: yes
   lineinfile:
     path: /etc/exports
-    line: "{{ ansible_user_dir }}"/nfs_shared 192.168.56.0/24(rw,sync)"
-    
+    line: "{{ ansible_user_dir }}/nfs_shared 192.168.56.0/24(rw,sync)"
+
 - name: nfs service restart
   become: yes
   service:
